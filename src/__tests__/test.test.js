@@ -28,44 +28,74 @@ afterEach(() => {
 
 
 
-test('O parágrafo existe', () => {
-  const list = screen.getAllByText("Me altere, por favor!");
-  expect(list.length).toBe(1)
+test('O campo para o nome do usuário existe', () => {
+  const textInputs = document.querySelectorAll('input[type="text"]');
+  expect(textInputs.length).toBe(1)
+})
+
+test('O campo para o email do usuário existe', () => {
+  const emailInputs = document.querySelectorAll('input[type="email"]');
+  expect(emailInputs.length).toBe(1)
+})
+
+test('O campo para o senha e confirmação de senha existem', () => {
+  const passwordInputs = document.querySelectorAll('input[type="password"]');
+  expect(passwordInputs.length).toBe(2)
 })
 
 test('O botão existe', () => {
-  const list = screen.getAllByText("Editar parágrafo");
-  expect(list.length).toBe(1)
+  const button = document.querySelectorAll('[type="submit"]');
+  expect(button.length).toBe(1)
 })
 
-test('Ao clicar no botão o parágrafo se tornar editável', () => {
-  const button = screen.getByText("Editar parágrafo");
-  const paragrafo = screen.getByText("Me altere, por favor!");
-  button.click()
-  expect(paragrafo.contentEditable).toBe(true)  
+test('O botão deve estar incialmente desabilitado', () => {
+  const button = document.querySelector('[type="submit"]');
+  expect(button.disabled).toBeDefined()
+})
+
+test('O botão deve estar habilitado somente quando todos os campos forem preenchidos', () => {
+  const button = document.querySelector('[type="submit"]');
+  expect(button.disabled).toBe(true)
+
+
+  const textInput = document.querySelector('input[type="text"]');
+  fireEvent.input(textInput, { target: { value: 'Bruno'}})
+  expect(button.disabled).toBeDefined()
+
+  const emailInput = document.querySelector('input[type="email"]');
+  fireEvent.input(emailInput, { target: { value: 'Bruno@mail.com'}})
+  expect(button.disabled).toBeDefined()
+
+  const passwordInputs = document.querySelectorAll('input[type="password"]');
+  fireEvent.input(passwordInputs[0], { target: { value: '123'}})
+  expect(button.disabled).toBeDefined()
+
+  fireEvent.input(passwordInputs[1], { target: { value: '123456'}})
+  expect(button.disabled).toBeFalsy()
 })
 
 
-test('Ao clicar no botão quando o parágrafo estiver editável deve torná-lo não editável', () => {
-  const button = screen.getByText("Editar parágrafo");
-  const paragrafo = screen.getByText("Me altere, por favor!");
-  button.click()
-  expect(paragrafo.contentEditable).toBe(true)  
-  button.click()
-  expect(paragrafo.contentEditable).toBe(false)  
-})
+test('Uma mensagem deve ser mostrada quando as senhas não coincidem', () => {
+  const button = document.querySelector('[type="submit"]');
+  expect(button.disabled).toBe(true)
 
 
-test('Alterando o conteúdo do parágrafo', () => {
-  let button = screen.getByText("Editar parágrafo");
-  const paragrafo = screen.getByText("Me altere, por favor!");
-  button.click()
-  expect(paragrafo.contentEditable).toBe(true)
-  button = screen.getByText('Salvar mudança')
-  paragrafo.innerHTML = "AA"
-  button.click()
-  expect(paragrafo.contentEditable).toBe(false)  
-  expect(paragrafo.innerHTML).toBe("AA")
-  button = screen.getByText("Editar parágrafo")
-  expect(button).not.toBeNull()
+  const textInput = document.querySelector('input[type="text"]');
+  fireEvent.input(textInput, { target: { value: 'Bruno'}})
+  expect(button.disabled).toBeDefined()
+
+  const emailInput = document.querySelector('input[type="email"]');
+  fireEvent.input(emailInput, { target: { value: 'Bruno@mail.com'}})
+  expect(button.disabled).toBeDefined()
+
+  const passwordInputs = document.querySelectorAll('input[type="password"]');
+  fireEvent.input(passwordInputs[0], { target: { value: '123'}})
+  expect(button.disabled).toBeDefined()
+
+  fireEvent.input(passwordInputs[1], { target: { value: '123456'}})
+  expect(button.disabled).toBeFalsy()
+
+  const invalid = document.querySelectorAll("input:invalid")
+  expect(invalid.length).toBe(1)
+  
 })

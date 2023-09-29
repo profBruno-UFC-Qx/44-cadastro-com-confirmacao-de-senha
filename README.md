@@ -12,17 +12,15 @@ Objetivo desse exercício é praticar a manipulação de elementos HTML usando J
 
 ## Instruções:
 
-1. Altere o arquivo **src/index.html** e adicione um parágrafo à página contendo o texto "Me altere, por favor!".
-2. Adicione um botão à página com o texto "Editar parágrafo".
-  - **O texto tem que ser exatamente este. Caso contrário o teste irá falhar.** 
-4. Quando o botão "Editar parágrafo" for clicado:
-  - Faça com que o parágrafo seja editável, permitindo que o aluno insira um novo texto.
-  - O botão "Editar parágrafo" agora deve ser renomeado para "Salvar mudança".
-5. Quando o botão "Salvar mudança" for clicado:
-  - O novo texto inserido deve substituir o conteúdo do parágrafo.
-  - O parágrafo não deve mais ser editável.
-  - O botão deve ser renomeado para "Editar parágrafo" novamente
-6. Teste o exercício abrindo o arquivo HTML em um navegador e interagindo com o botão.
+1. Altere o arquivo **src/index.html** e crie um formulário de cadastro que solicita o nome, o e-mail, a senha e a confirmação de senha do usuário.
+2. Adicione campos de entrada de texto para o **nome** e o **e-mail**, um campo de senha para a **senha** e outro campo de senha para a **confirmação de senha**.
+3. Utilize HTML5 para adicionar atributos de validação, como required e `type="email"`.
+  - Todos os campo são obrigatórios
+4. Crie uma função JavaScript para validar se a senha e a confirmação de senha são iguais. Exiba uma mensagem de erro caso sejam diferentes.
+  - Utilize a constraint API para isso de forma que a mensagem apareça como as outras que o navegador exibe por padrão ao encontrar um problema de validação.
+5. Adicione um botão de envio ao formulário.
+   - O botão só deve estar habilitado quando todos os campos do formulário estiverem preenchidos
+6. Estilize o formulário com CSS para melhorar a aparência.
 
 
 **Certifique-se de validar seu código HTML usando um validador como o [W3C Markup Validation Service](https://validator.w3.org/), para garantir que seu código esteja sem erros e bem formado**.
